@@ -15,3 +15,4 @@ This repository contains a Python script for generating an ATS-friendly PDF resu
 - `requests` library (install using `pip install requests`)
 
 ## Resume generate by the code 
+![tempResume](https://github.com/mesumitkumarsk/ats-friendly-resume-builder/assets/144142094/cf16e5f8-64ab-49f8-87d7-59d992596a6d)
