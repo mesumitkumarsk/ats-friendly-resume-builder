@@ -1,20 +1,20 @@
 import requests
 
-def convert_markdown_to_pdf(markdown_content, Resume_file="Resume.pdf", engine="weasyprint"):
-	# Define CSS styles for the PDF
+def make_pdf(markdown_content, Resume_file="Resume.pdf", engine="weasyprint"):
+
 	cssfile = """
 				body{
 					padding: 0px;
 					margin:0px;
 				}
 				h1 {
-				color: MidnightBlue;
+				color: black;
 				margin:0px;
 				padding:0px;
 					
 				}
 				h3{
-					color: MidnightBlue;
+					color: black;
 					padding-bottom:0px; 
 					margin-bottom:0px; 
 				}
@@ -23,22 +23,22 @@ def convert_markdown_to_pdf(markdown_content, Resume_file="Resume.pdf", engine="
 				}
 				
 				"""
-	# API endpoint for converting Markdown to PDF
+
 	url = "https://md-to-pdf.fly.dev"
 
-	# Data to be sent in the POST request
+
 	data = {
 		'markdown': markdown_content,
 		'css': cssfile,
 		'engine': engine
 	}
 
-	# Send a POST request to the API
+
 	response = requests.post(url, data=data)
 
-	# Check if the response is successful (status code 200)
+
 	if response.status_code == 200:
-		# Save the generated PDF to a file
+
 		with open(Resume_file, 'wb') as f:
 			f.write(response.content)
 		print(f"PDF saved to {Resume_file}")
@@ -59,7 +59,7 @@ class Resume:
 		self.achievements = achievements
 		self.activities = activities
 
-	def generate_markdown(self):
+	def collect_info(self):
 		
 		markdown_text = f"<h1 style=\"text-align:center;\">{self.name
 					}</h1>\n<p style=\"text-align:center;\">Email: {self.email
@@ -91,7 +91,7 @@ class Resume:
 
 		return markdown_text
 
-def get_user_input():
+def user_input():
 	name = input("Enter your name: ")
 	email = input("Enter your email: ")
 	mobile = input("Enter your mobile number: ")
@@ -154,6 +154,6 @@ def get_user_input():
 				experience, projects, achievements, activities)
 
 if __name__ == "__main__":
-	user_resume = get_user_input()
-	markdown_text = user_resume.generate_markdown()
-	convert_markdown_to_pdf(markdown_text)
+	resume = user_input()
+	infomation = resume.collect_info()
+	make_pdf(infomation)
